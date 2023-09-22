@@ -1,5 +1,5 @@
 "use client";
-import { UserContext } from "@/context/UserContext";
+import { UserContext, UserProvider } from "@/app/usercontext/context/UserContext";
 import User from "@/app/usercontext/components/User";
 import { useEffect, useState } from "react";
 
@@ -24,13 +24,13 @@ export default function UserContextPage() {
   }, []);
 
   return (
-    <UserContext.Provider
+    <UserProvider
       value={{
         name: githubContent.name,
         age: githubContent.age,
       }}
     >
       <User />
-    </UserContext.Provider>
+    </UserProvider>
   );
 }
