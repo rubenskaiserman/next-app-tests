@@ -1,13 +1,12 @@
 import { UserContext } from "@/context/UserContext";
+import { useContext } from "react";
 
 export default function User() {
+  const userContext = useContext(UserContext);
+
   return (
-    <UserContext.Consumer>
-      {(context) => (
-        <p>
-          {context.name} - {context.age}
-        </p>
-      )}
-    </UserContext.Consumer>
+    <p>
+      {userContext.name} - {userContext.age}
+    </p>
   );
 }

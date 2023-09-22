@@ -3,10 +3,7 @@ import { UserContext } from "@/context/UserContext";
 import User from "@/app/usercontext/components/User";
 import { useEffect, useState } from "react";
 
-export default function Hello() {
-  // I can just call the function here
-  // It is not needed to be inside useEffect
-  // Neither to be in getStaticProps since we're working with app router
+export default function UserContextPage() {
   const [githubContent, setGithubContent] = useState({
     name: "Loading...",
     age: 0,
@@ -21,6 +18,7 @@ export default function Hello() {
     };
 
     getGithubPage().then((data) => {
+      data.age = 30;
       setGithubContent(data);
     });
   }, []);
@@ -29,7 +27,7 @@ export default function Hello() {
     <UserContext.Provider
       value={{
         name: githubContent.name,
-        age: 25,
+        age: githubContent.age,
       }}
     >
       <User />
