@@ -1,13 +1,12 @@
 "use client";
-import { UserContext, UserProvider } from "@/app/usercontext/context/UserContext";
 import User from "@/app/usercontext/components/User";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { UserContext } from "./context/UserContext";
+import { useContext, useEffect, useState } from "react";
 
 export default function UserContextPage() {
-  const [githubContent, setGithubContent] = useState({
-    name: "Loading...",
-    age: 0,
-  });
+  const { user, setUser }: any = useContext(UserContext);
+
   useEffect(() => {
     const getGithubPage = async () => {
       const githubData = fetch("https://api.github.com/users/rubskaiserman").then((response) =>
@@ -19,18 +18,18 @@ export default function UserContextPage() {
 
     getGithubPage().then((data) => {
       data.age = 30;
-      setGithubContent(data);
+      setUser({
+        name: data.name,
+        age: data.age,
+      });
     });
-  }, []);
+  }, [user]);
+
+  console.log(user);
 
   return (
-    <UserProvider
-      value={{
-        name: githubContent.name,
-        age: githubContent.age,
-      }}
-    >
+    <UserContext.Provider value={{ user, setUser }}>
       <User />
-    </UserProvider>
+    </UserContext.Provider>
   );
 }

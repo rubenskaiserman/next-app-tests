@@ -6,7 +6,7 @@ export default function User() {
 
   return (
     <p>
-      {userContext.name} - {userContext.age}
+      {userContext.user.name} - {userContext.user.age}
     </p>
   );
 }
